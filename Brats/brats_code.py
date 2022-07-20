@@ -14,8 +14,8 @@ VERBOSE = 1
 # ----
 
 import os
-os.chdir('D:\Chan Vese Algorithm\Code_sauber\Code_brats')
 
+#go to directory where images are
 #%% preprocessing , resizing, windowing
 #Ödem example, preprocessing procedures
 img1= plt.imread("bild1.png")
@@ -24,43 +24,18 @@ img2= plt.imread("bild2.png")
 img2 = img2[10:220,30:195,:3]
 img3= plt.imread("bild3.png")
 img3 = img3[10:220,30:195,:3]
-gt = plt.imread("GT_brats.png")
-gt = gt[10:220,35:200,:3]
-gt1 = np.copy(gt)
-gt1[gt1[:,:,0]<1]=0
-gt1= rgb2gray(gt1)
-gt1[gt1>0]=1
-
-gt2 = np.copy(gt)
-gt2[gt2[:,:,2]<1]=0
-gt2= rgb2gray(gt2)
-gt2[gt2>0]=1
-
-gt3 = np.copy(gt)
-gt3[gt3[:,:,1]<1]=0
-gt3= rgb2gray(gt3)
-gt3[gt3>0]=1
-
-gt3 = gt3-gt2
-gt3[gt3>1]=0
-gt3[gt3<1]=0
-
+#RGB to grayscale
 img1 = rgb2gray(img1)
 img2 = rgb2gray(img2)
 img3 = rgb2gray(img3)
-# gt1 = rgb2gray(gt1)
-# gt2 = rgb2gray(gt2)
-# gt3 = rgb2gray(gt3)
 
-
+#resizing
 img1=resize(img1,(127,100))
 img2=resize(img2,(127,100))
 img3=resize(img3,(127,100))
-gt1=resize(gt1,(127,100))
-gt2=resize(gt2,(127,100))
-gt3=resize(gt3,(127,100))
 
 
+#normalization and windoing
 img1 = img1/np.max(img1)
 img2 = img2/np.max(img2)
 img2a = img2-np.percentile(img2,20)
@@ -68,10 +43,7 @@ img2a[img2a<0]=0
 img2a=img2a/np.max(img2a)
 img3 = img3/np.max(img3)
 
-gt1 = gt1/np.max(gt1)
-gt2 = gt2/np.max(gt2)
-gt3 = gt3/np.max(gt3)
-
+#mask generation
 mask=np.copy(img1)
 mask[mask>0.25]=0.5
 
@@ -86,7 +58,7 @@ f[2] = f[2]/maxi
 #f[2][f[2]>0.35]=np.max(f[2])
 #%%
 gt = [gt2,gt3,gt1]
-Lambda = 0.1
+Lambda = 0.15
 '''now f is a list'''
 def multi_channel(f, n_it, return_energy=True):
     f=np.asarray(f)
