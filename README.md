@@ -24,13 +24,17 @@ The required packages are:
 Note: Other versions of these packages might work too, there are just those we used. The complete list of packages and corresponding versions is provided in requirements.txt.
 ## Code
 The code consists of the following parts:
-1. functions.py: This script contains all of the functions needed (for a detailed description of these functiosn we refer to Section 3 of the manuscript)
-2. code.py: In this script, the segmentation process is executed. The list f represents the multichannel inputs which result from prefiltering. The images should be noramlized to have values in [0,1].
+1. Functions.py: This script contains all of the functions needed (for a detailed description of these functiosn we refer to Section 3 of the manuscript)
+2. Code.py: In this script, the segmentation process is executed. The list f represents the multichannel inputs which result from prefiltering. The images should be noramlized to have values in [0,1].
+3. gabor.py: which is used for creating a filterbank for the texture based pre-filtering which was applied. This code runs for the Brodatz3- example from the paper and can be adapted in an analogous manner for the other examples as well. 
+
+In the subfolders ``Butterfly'' and ``Brodatz'' the codes corresponding to these two examples are provided. 
+
  
  ## Example
- The feature maps are extracted either by the application of Gabor filters of a suitible RGB filtering. The provided code example will lead to the following output:
+ The feature maps are extracted either by the application of Gabor filters of a suitible RGB filtering. The provided code examples were used to create the following figures visualized in the paper.
  
 <img src="./butterfly_example.png">
-<img src="./curves.png">
+<img src="./Brodatz3.png">
 
  
