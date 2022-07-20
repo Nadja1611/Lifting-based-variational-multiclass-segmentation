@@ -1,13 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jan 31 19:14:44 2021
-
-@author: c7021086
-"""
-
-
-
-
 from __future__ import division
 import numpy as np
 from math import sqrt
