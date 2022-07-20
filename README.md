@@ -29,7 +29,7 @@ Note: Other versions of these packages might work too, these are just those we u
 The code consists of the following parts:
 1. Functions.py: This script contains all of the functions needed (for a detailed description of these functiosn we refer to Section 3 of the manuscript)
 2. Code.py: In this script, the segmentation process is executed. The list f represents the multichannel inputs which result from prefiltering. The images should be noramlized to have values in [0,1].
-3. gabor.py: which is used for creating a filterbank for the texture based pre-filtering which was applied. This code runs for the Brodatz3- example from the paper and can be adapted in an analogous manner for the other examples as well. 
+3. gabor.py: This script is used for creating a filterbank for the texture based pre-filtering which was applied. This code runs for the Brodatz3- example from the paper and can be adapted in an analogous manner for the other examples as well. To run this code you will need the image textur_3channel.png which can be found in the folder Brodatz.
 
 In the subfolders ``Butterfly`` and ``Brodatz`` the codes corresponding to these two examples are provided. 
 
