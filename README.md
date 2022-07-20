@@ -27,6 +27,9 @@ The code consists of the following parts:
 1. functions.py: This script contains all of the functions needed (for a detailed description of these functiosn we refer to Section 3 of the manuscript)
 2. code.py: In this script, the segmentation process is executed. The list f represents the multichannel inputs which result from prefiltering. The images should be noramlized to have values in [0,1].
  
- ##Example
+ ## Example
+ The feature maps are extracted either by the application of Gabor filters of a suitible RGB filtering. 
+ 
+<img src="./pipeline_diagram.png">
  
 <img src="./pipeline_diagram.png">
