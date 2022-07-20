@@ -28,7 +28,9 @@ The code consists of the following parts:
 2. code.py: In this script, the segmentation process is executed. The list f represents the multichannel inputs which result from prefiltering. The images should be noramlized to have values in [0,1].
  
  ## Example
- The feature maps are extracted either by the application of Gabor filters of a suitible RGB filtering. 
+ The feature maps are extracted either by the application of Gabor filters of a suitible RGB filtering. The provided code example will lead to the following output:
  
 <img src="./butterfly_example.png">
+<img src="./curves.png">
+
  
