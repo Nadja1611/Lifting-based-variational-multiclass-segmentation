@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jan 31 19:14:44 2021
+
+@author: c7021086
+"""
+
 
 from __future__ import division
 import numpy as np
@@ -11,47 +18,49 @@ import scipy
 from skimage.transform import resize
 from skimage.color import rgb2gray
 
+#from utils import *
+
+#from tomo_operators import AstraToolbox
+#from convo_operators import *
+
 # ----
 VERBOSE = 1
 # ----
 
 import os
-os.chdir('D://Chan Vese Algorithm//Code_sauber//Code_Brodatz3')
+os.chdir('D://Chan Vese Algorithm//Code_sauber//Code_butterfly')
 
-
-gt = plt.imread("textur1_GT.png")
-gt = gt[:,47:957]
-gt =resize(gt,(100,100))
-gt1 = gt[:,:,0]
-gt1[gt1>0.5]=1
+#Schmetterling example
+img = plt.imread("filtering_butterfly.png")[:,:,:3]
+img2 = plt.imread("filtering_butterfly2.png")[:,:,:3]
+gt1 = plt.imread("gt_butterfly.png")
+gt1[gt1[:,:,0]>0.6]=1
 gt1[gt1<1]=0
-#gt1 = rgb2gray(gt1[:,:])
+gt2 = plt.imread("gt_flower.png")
+gt2[gt2>0.05]=1
+gt2[gt2<0.9]=0
+img = rgb2gray(img[:,:,:])
+img2 = rgb2gray(img2[:,:,:])
+img=resize(img,(100,100))
+img2=resize(img2,(100,100))
+img = img/np.max(img)
+img2 = img2/np.max(img2)
 
+gt1 = rgb2gray(gt1[:,:,:3])
+gt2 = rgb2gray(gt2[:,:,:3])
+gt1=resize(gt1,(100,100))
+gt2=resize(gt2,(100,100))
+gt1 = gt1/np.max(gt1)
+gt2 = gt2/np.max(gt2)
 
-
-gt3 = gt[:,:,2]
-gt3[gt3>0.7]=1
-gt3[gt3<1]=0
-#gt3 = rgb2gray(gt3[:,:])
-gt2 = np.ones_like(gt1)- (gt1+gt3)
-#gt2 = rgb2gray(gt2[:,:])
-
-GT = [gt3,gt1,gt2]
-f=[]
-for i in range(1,4):
-    img = plt.imread("gabor" + str(i)+".png")
-    img =resize(img,(100,100))
-    img= rgb2gray(img[:,:,:3])
-    img=img/np.max(img)
-    f.append(img)
-
-
-Lambda = 0.2
+gt =[gt1,gt2]
+f=[img, img2]
+Lambda = 0.5
 '''now f is a list'''
 def multi_channel(f, n_it, return_energy=True):
     f=np.asarray(f)
-    sigma = 1.0/np.sqrt(10)
-    tau = 1.0/np.sqrt(10)
+    sigma = 1.0/16.0
+    tau = 1.0/8.0
     x = f
     p=[]
     for i in range(0,len(f)):
@@ -59,12 +68,9 @@ def multi_channel(f, n_it, return_energy=True):
         p.append(p2)
     q = 1*f
     r = 1*f
-    x_tilde=f
-   # x_tilde = [0.3333333*np.ones_like(f[0]),0.4*np.ones_like(f[0]),0.1*np.ones_like(f[0]),0.7*np.ones_like(f[0]),0.5*np.ones_like(f[0])]
-   # x_tilde = [a,b,c,d]
+    x_tilde = f
     theta = 1.0
-    if return_energy: en = np.zeros(n_it)
-    en= np.zeros(n_it)
+    if return_energy: en= np.zeros(n_it)
     tvsum = np.zeros(n_it)
     fidsum = np.zeros(n_it)
     error = np.zeros(n_it)
@@ -102,15 +108,11 @@ def multi_channel(f, n_it, return_energy=True):
             x_t = x_tilde[i] + theta*(x_tilde[i] - x_old[i])
             x.append(x_t)
         x_tilde=x
-        err = np.sum(np.abs(np.asarray(x_tilde)-np.asarray(GT)))/3
-        plt.subplot(131)
+        err = np.sum(np.abs(np.asarray(x_tilde)-np.asarray(gt)))
+        plt.subplot(121)
         plt.imshow(x[0])
-        plt.subplot(132)
+        plt.subplot(122)
         plt.imshow(x[1])
-        plt.subplot(133)
-        plt.imshow(x[2])
-        #plt.subplot(144)
-        #plt.imshow(x[3])
         plt.show()
         if return_energy:
             fid=[]
@@ -133,46 +135,25 @@ def multi_channel(f, n_it, return_energy=True):
                 print("[%d] : energy %e \t fidelity %e \t TV %e" %(k,energy,np.sum(fid),np.sum(tv)))
     if return_energy: return en, x_tilde, tvsum, fidsum, error
     else: return x, r,q
-
 p = multi_channel(f,200)
-#comparison to normal nonconvex chan vese
-Lambda=0.5
-q1= multi_channel(f,200)
-Lambda=0.1
-q2= multi_channel(f,200)
 
+Lambda=0.1
+q1= multi_channel(f,200)
 #show the results
 r = np.arange(0,200,1)
 plt.plot(r,p[0],'g',label="energy")
 plt.plot(r,q1[0],'g--')
-plt.plot(r,q2[0],'g:')
 plt.plot(r,p[2], 'r',label = "TV")
 plt.plot(r,q1[2],'r--')
-plt.plot(r,q2[2],'r:')
-#plt.plot(r,p[3],'c-',label="fidelity")
-#plt.plot(r,q1[3],'c--')
-#plt.plot(r,q2[3],'c:')
+plt.plot(r,p[3],'c-',label="fidelity")
+plt.plot(r,q1[3],'c--')
 plt.plot(r,p[4], 'b-', label = "error")
 plt.plot(r,q1[4], 'b--')
-plt.plot(r,q2[4], 'b:')
 
 #plt.plot(r,q005[3],'c--')
 plt.xlim([0.00, 200])
-plt.ylim([0, 2500])
+plt.ylim([0, 2750])
 plt.legend(loc="upper right")
 plt.show()
 
 
-
-
-
-
-q2[1][0][q2[1][0]<0.33]=0
-q2[1][1][q2[1][1]<0.33]=0
-q2[1][2][q2[1][2]<0.33]=0
-M = np.expand_dims(q2[1][0], axis=-1)
-N= np.expand_dims(q2[1][1], axis=-1)
-O=np.expand_dims(q2[1][2], axis=-1)
-M= np.concatenate((M,N,O), axis = -1)
-g= np.argmax(M,axis=-1)
-plt.imshow(g)
