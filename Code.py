@@ -21,7 +21,7 @@ VERBOSE = 1
 # ----
 
 import os
-os.chdir('D://Chan Vese Algorithm//Code_sauber//Code_butterfly')
+os.chdir('//images')
 
 #Schmetterling example
 img = plt.imread("filtering_butterfly.png")[:,:,:3]
