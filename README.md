@@ -6,9 +6,7 @@ This repository contains the source code of the paper "Lifting-based variational
 ## Highlights
 The main components of the proposed pipeline are as follows:
 
-1. Lifting: Choose K feature enhancing transforms in a way thath the intensity values of the k-th feature map allow to well separate $R_1$ from the remaining part $\Omega\setminus R_1$.
-2. Training of a segmentation module, a U-Net, on the remaining slices to obtain axial probability masks of the PLIC.
-3. Training of a classification network, the Thalamic-Slice-Selector, that identifies the slice that corresponds to the level of the boundary between upper and middle third of the thalamus.
-4. The combination of the results from 2. and 3. yield ROI-boxes, from which the patches in coronal and sagittal plane view, arise.  
-5. Training of a segmentation module on coronal and sagittal plane view patches. 
-6. Combination of the resulting probability masks and creation of binary PLIC-masks.
+1. \textit{Lifting:} Choose $K$ feature enhancing transforms $\Phi_1,\dots,\Phi_K$ in a way thath the intensity values of the $k$-th feature map %\phi_K\coloneqq\Phi_k(f)$ allow to well separate $\Sigma_k$ rom the remaining part $\Omega\setminus\Sigma_k$.
+
+2. \textit{Minimization:} For given parameter $\lambda>0$, compute a minimizer of the proposed energy functional (see p.2 Problem 1.1 in the paper)
+3. \textit{Assignment:} For each $k\in\{0,\dots,K\} define the region $\Sigma_k$ as the set of all $x\in\Omega$ such that $u_k^{\lambda}(x)$ is maximal along the values $u_0^{\lambda}(x),\dots,u_K^{\lambda}(x)$ with $u_0 = 1-sum_{k=1}^u_k$.
