@@ -16,7 +16,7 @@ VERBOSE = 1
 # ----
 
 import os
-os.chdir('D://Chan Vese Algorithm//Code_sauber//Code_Brodatz3')
+os.chdir('.//Brodatz')
 
 
 gt = plt.imread("textur1_GT.png")
