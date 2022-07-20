@@ -28,7 +28,7 @@ The code consists of the following parts:
 2. Code.py: In this script, the segmentation process is executed. The list f represents the multichannel inputs which result from prefiltering. The images should be noramlized to have values in [0,1].
 3. gabor.py: which is used for creating a filterbank for the texture based pre-filtering which was applied. This code runs for the Brodatz3- example from the paper and can be adapted in an analogous manner for the other examples as well. 
 
-In the subfolders ``Butterfly'' and ``Brodatz'' the codes corresponding to these two examples are provided. 
+In the subfolders ``Butterfly`` and ``Brodatz`` the codes corresponding to these two examples are provided. 
 
  
  ## Example
