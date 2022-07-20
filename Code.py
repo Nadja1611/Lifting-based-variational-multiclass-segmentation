@@ -6,10 +6,12 @@ Created on Sun Jan 31 19:14:44 2021
 """
 
 
+
+
 from __future__ import division
 import numpy as np
 from math import sqrt
-from functions import *
+from Functions import *
 import matplotlib.pyplot as plt
 from PIL import Image
 import imageio
@@ -17,6 +19,7 @@ from skimage.color import rgb2gray
 import scipy
 from skimage.transform import resize
 from skimage.color import rgb2gray
+
 
 #from utils import *
 
