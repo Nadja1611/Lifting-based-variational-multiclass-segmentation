@@ -12,7 +12,7 @@ import scipy
 from skimage.transform import resize
 
 
-os.chdir('D:\Chan Vese Algorithm\Code_sauber')
+os.chdir('.\')
            
 im = plt.imread('textur_3channel.png')
 #im = plt.imread("5-channel_texture.png")
