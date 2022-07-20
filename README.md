@@ -13,8 +13,11 @@ The main components of the proposed pipeline are as follows:
 
 ## Requirements
 To install the requirements needed to run the code via anaconda execute:
+
 * conda create --name <env> --file requirements.txt
+
 The required packages are:
+
  1. scipy=1.7.3
  2. scikit-image=0.19.2
  3. scikit-learn=1.0.2
