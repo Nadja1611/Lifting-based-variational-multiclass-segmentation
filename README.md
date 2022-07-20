@@ -35,7 +35,7 @@ In the subfolders ``Butterfly`` and ``Brodatz`` the codes corresponding to these
 
  
  ## Example
- The feature maps are extracted either by the application of Gabor filters of a suitible RGB filtering. The provided code examples were used to create the following figures visualized in the paper.
+ The feature maps are extracted either by the application of Gabor filters of a suitable RGB filtering. The provided code examples were used to create the following figures visualized in the paper.
  
 <img src="./butterfly_example.png">
 <img src="./Brodatz3.png">
