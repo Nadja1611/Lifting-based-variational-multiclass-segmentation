@@ -9,7 +9,7 @@ Created on Sun Jan 31 19:14:44 2021
 from __future__ import division
 import numpy as np
 from math import sqrt
-from Functions import *
+from functions import *
 import matplotlib.pyplot as plt
 from PIL import Image
 import imageio
