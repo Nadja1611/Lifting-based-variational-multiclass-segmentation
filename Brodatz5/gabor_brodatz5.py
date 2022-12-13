@@ -18,8 +18,9 @@ import os
 import scipy
 from skimage.transform import resize
 
+
+os.chdir('//images')
 im = plt.imread('5-channel_texture.png')
-#im = plt.imread("5-channel_texture.png")
 grayscale = rgb2gray(im[:,:,:3])
 img = grayscale
 img1 = img
