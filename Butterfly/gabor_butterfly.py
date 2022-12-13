@@ -17,7 +17,7 @@ import scipy
 from skimage.transform import resize
 
 
-os.chdir('C://Users//Nadja//Documents//Paper//Chan-Vese-Paper')
+os.chdir('//images')
            
 im = plt.imread('butterfly.png')
 
